@@ -1,109 +1,117 @@
-# MusicHub
+# Web Development Final Project - *MusicHub*
 
-> A forum for music lovers — share your favorite tracks, debate albums, and post hot takes about your top artists.
+Submitted by: **Jehu**
 
-Final project for FAU Full-Stack Dev (Spring 2026). Built with React + Vite + Supabase, deployed on Netlify, with a Gemini-powered post-summary feature.
+This web app: **A forum for music lovers — create posts about your favorite tracks, albums, or artists, browse a home feed of everyone's takes, sort by newest or most popular, search by title, leave comments, upvote posts, and read AI-generated summaries of any post and its discussion. Built with React + Vite, backed by Supabase for auth and storage, and deployed on Netlify with a Gemini-powered serverless function for the LLM summaries.**
 
-## Live demo
+🌐 **Live app:** <https://musichub-jehu.netlify.app>
 
-> 🌐 **Deployed app:** <https://musichub-jehu.netlify.app>
->
-> 🎬 **Demo video:** _coming soon — gif/video link will go here_
+Time spent: **X** hours spent in total
 
-## Features
+## Required Features
 
-- Create posts with a title, optional content, and optional image URL
-- Home feed with all posts (newest / most popular sorts)
-- Search posts by title
-- Dedicated page per post, with comments and an upvote button
-- Edit and delete your own posts
-- User accounts via Supabase Auth: email/password, Google sign-in, password reset, logout
-- AI-generated summary of any post (title + content + comments + upvotes) via Google Gemini
+The following **required** functionality is completed:
 
-## Local development
 
-```bash
-npm install
-cp .env.example .env  # fill in your keys
-npm run dev
-```
+- [x] **Web app includes a create form that allows the user to create posts**
+  - Form requires users to add a post title
+  - Forms should have the *option* for users to add:
+    - additional textual content
+    - an image added as an external image URL
+- [x] **Web app includes a home feed displaying previously created posts**
+  - Web app must include home feed displaying previously created posts
+  - By default, each post on the posts feed should show only the post's:
+    - creation time
+    - title
+    - upvotes count
+  - Clicking on a post should direct the user to a new page for the selected post
+- [x] **Users can view posts in different ways**
+  - Users can sort posts by either:
+    -  creation time
+    -  upvotes count
+  - Users can search for posts by title
+- [x] **Users can interact with each post in different ways**
+  - The app includes a separate post page for each created post when clicked, where any additional information is shown, including:
+    - content
+    - image
+    - comments
+  - Users can leave comments underneath a post on the post page
+  - Each post includes an upvote button on the post page.
+    - Each click increases the post's upvotes count by one
+    - Users can upvote any post any number of times
 
-The app starts on http://localhost:5173.
+- [x] **A post that a user previously created can be edited or deleted from its post pages**
+  - After a user creates a new post, they can go back and edit the post
+  - A previously created post can be deleted from its post page
 
-> The app also runs without any env vars — until Supabase is configured,
-> posts and comments are stored in your browser's localStorage so you can
-> still click around the UI.
+The following **optional** features are implemented:
 
-## Supabase setup
+- [ ] Web app implements pseudo-authentication
+  - Users can only edit and delete posts or delete comments by entering the secret key, which is set by the user during post creation
+  - **or** upon launching the web app, the user is assigned a random user ID. It will be associated with all posts and comments that they make and displayed on them
+  - For both options, only the original user author of a post can update or delete it
+- [ ] Users can repost a previous post by referencing its post ID. On the post page of the new post
+  - Users can repost a previous post by referencing its post ID
+  - On the post page of the new post, the referenced post is displayed and linked, creating a thread
+- [ ] Users can customize the interface
+  - e.g., selecting the color scheme or showing the content and image of each post on the home feed
+- [ ] Users can add more characterics to their posts
+  - Users can share and view web videos
+  - Users can set flags such as "Question" or "Opinion" while creating a post
+  - Users can filter posts by flags on the home feed
+  - Users can upload images directly from their local machine as an image file
+- [ ] Web app displays a loading animation whenever data is being fetched
 
-1. Create a new project at [supabase.com](https://supabase.com).
-2. **SQL Editor → New query** → paste the contents of
-   [`supabase/schema.sql`](supabase/schema.sql) and click **Run**.
-3. **Settings → API** → copy your **Project URL** and **anon public key**
-   into `.env`:
-   ```
-   VITE_SUPABASE_URL=https://YOUR-PROJECT.supabase.co
-   VITE_SUPABASE_ANON_KEY=ey...
-   ```
-4. **Authentication → Providers → Google** (optional, for Google sign-in):
-   set up an OAuth client at <https://console.cloud.google.com> and paste
-   the Client ID and Secret in.
-5. Restart the dev server. The app now reads/writes from Supabase.
+The following **additional** features are implemented:
 
-## AI summary feature
+* [x] **Web App Deployment** — deployed to Netlify with continuous deploys via the Netlify CLI. Live URL: <https://musichub-jehu.netlify.app>
+* [x] **Real authentication tied to Supabase** (goes beyond pseudo-auth)
+  - Email/password sign up
+  - Email/password log in
+  - Continue with Google (OAuth)
+  - Forgot-password / reset-password email flow
+  - Logout from the header
+  - Row-level security policies so only post authors can edit or delete their own posts
+* [x] **LLM-powered post summary** — every post page has a "Generate summary" button that calls a Netlify serverless function (`netlify/functions/summarize-post.js`), which forwards the post title, content, image flag, upvote count, and full comment list to Google Gemini and returns a concise 2-3 sentence summary, displayed in a styled card on the post page. The Gemini API key lives only in the function's environment, never in the browser.
+* [x] **Polished UI** — teal-themed header with sticky positioning, search bar, hover-lift card animation, gradient AI summary card, mobile-responsive layout, custom favicon.
+* [x] **Sensible repo hygiene** — `.env.example` template, `supabase/schema.sql` checked in for one-click backend reproduction, `netlify.toml` with SPA fallback redirects, idempotent SQL policies that are safe to re-run.
 
-Each post page has a **Generate summary** button that calls Google Gemini
-(via the `netlify/functions/summarize-post.js` serverless function) and
-displays a 2-3 sentence summary of the post + comments + upvotes.
+## Video Walkthrough
 
-The Gemini API key never leaves the server. Set it in:
+Here's a walkthrough of implemented user stories:
 
-- **Netlify dashboard:** Site settings → Environment variables →
-  `GEMINI_API_KEY`.
-- **Locally** (only if you run `netlify dev`): in your `.env` file.
+<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
-Get a free key at <https://aistudio.google.com/app/apikey>.
+<!-- Replace this with whatever GIF tool you used! -->
+GIF created with ...
+<!-- Recommended tools:
+[Kap](https://getkap.co/) for macOS
+[ScreenToGif](https://www.screentogif.com/) for Windows
+[peek](https://github.com/phw/peek) for Linux. -->
 
-## Deploying to Netlify
+## Notes
 
-1. Push the repo to GitHub.
-2. [app.netlify.com](https://app.netlify.com) → **Add new site → Import an
-   existing project → GitHub** → pick this repo.
-3. Build settings are auto-detected from `netlify.toml`
-   (`npm run build` → `dist/`). Click **Deploy**.
-4. Once the first deploy finishes, go to **Site settings → Environment
-   variables** and add:
-   - `VITE_SUPABASE_URL`
-   - `VITE_SUPABASE_ANON_KEY`
-   - `GEMINI_API_KEY`
-5. **Deploys → Trigger deploy → Clear cache and deploy site** so the new
-   env vars are baked into the next build.
-6. Copy your `*.netlify.app` URL.
-7. Add that URL to:
-   - **Supabase → Authentication → URL Configuration → Redirect URLs**
-   - **Google Cloud → APIs & Services → Credentials → your OAuth client →
-     Authorized JavaScript origins / redirect URIs** (so Google sign-in
-     works in production)
+Describe any challenges encountered while building the app.
 
-## Tech stack
+A few real ones worth calling out:
 
-- **Frontend:** React 18, Vite, React Router
-- **Backend:** Supabase (Postgres + Auth)
-- **AI:** Google Gemini (via a Netlify serverless function)
-- **Hosting:** Netlify
+- **GitHub Classroom org permissions** blocked installing third-party apps (including Netlify) on the assignment repo, so I deployed via the Netlify CLI (`netlify deploy --build --prod`) instead of the standard GitHub integration.
+- **Gemini free-tier quirks**: my Google account was issued `limit: 0` on `gemini-2.0-flash` regardless of which project the API key was created in, and `gemini-1.5-flash` had been deprecated from `v1beta`. Settled on `gemini-2.5-flash`, which had a healthy free quota.
+- **Supabase RLS**: started with permissive insert policies during development so the UI could be exercised end-to-end without auth, then tightened them to `auth.uid() = user_id` once login/signup was wired up. The schema file's `drop policy if exists ... create policy ...` pattern made re-running it safe across iterations.
+- **Pre-Supabase development**: the data layer (`src/lib/postsStore.js`) transparently falls back to `localStorage` when Supabase env vars aren't set, so the app stays clickable before the backend is configured. Same function signatures as the Supabase path — swap is a one-file change.
 
-## Project layout
+## License
 
-```
-.
-├── netlify/functions/    # serverless functions (summarize-post)
-├── public/               # static assets, favicon, _redirects
-├── src/
-│   ├── components/       # Header, PostCard, PostSummary, RequireAuth
-│   ├── context/          # AuthContext
-│   ├── lib/              # supabaseClient, postsStore, summarize, helpers
-│   └── pages/            # Home, CreatePost, PostDetail, EditPost, auth
-├── supabase/schema.sql   # database schema + RLS policies
-├── netlify.toml          # build + functions config
-└── vite.config.js
-```
+    Copyright 2026 Jehu
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
