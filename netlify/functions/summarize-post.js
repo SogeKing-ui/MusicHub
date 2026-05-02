@@ -5,7 +5,7 @@
 // the browser. Set it in Netlify dashboard -> Site settings ->
 // Environment variables (and locally in .env if you run `netlify dev`).
 
-const MODEL = "gemini-1.5-flash";
+const MODEL = "gemini-2.5-flash";
 const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent`;
 
 export default async (req) => {
