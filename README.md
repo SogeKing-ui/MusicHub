@@ -1,12 +1,12 @@
 # Web Development Final Project - *MusicHub*
 
-Submitted by: **Jehu**
+Submitted by: **Jehu Emilcar**
 
 This web app: **A forum for music lovers — create posts about your favorite tracks, albums, or artists, browse a home feed of everyone's takes, sort by newest or most popular, search by title, leave comments, upvote posts, and read AI-generated summaries of any post and its discussion. Built with React + Vite, backed by Supabase for auth and storage, and deployed on Netlify with a Gemini-powered serverless function for the LLM summaries.**
 
 🌐 **Live app:** <https://musichub-jehu.netlify.app>
 
-Time spent: **X** hours spent in total
+Time spent: **4** hours spent in total
 
 ## Required Features
 
@@ -80,14 +80,11 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
-<!-- Replace this with whatever GIF tool you used! -->
-GIF created with ...
-<!-- Recommended tools:
-[Kap](https://getkap.co/) for macOS
-[ScreenToGif](https://www.screentogif.com/) for Windows
-[peek](https://github.com/phw/peek) for Linux. -->
+
+## Gif
+
+
 
 ## Notes
 
@@ -102,7 +99,7 @@ A few real ones worth calling out:
 
 ## License
 
-    Copyright 2026 Jehu
+    Copyright 2026 Jehu Emilcar
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
