@@ -6,7 +6,7 @@ Final project for FAU Full-Stack Dev (Spring 2026). Built with React + Vite + Su
 
 ## Live demo
 
-> 🌐 **Deployed app:** _coming soon — Netlify URL will go here_
+> 🌐 **Deployed app:** <https://musichub-jehu.netlify.app>
 >
 > 🎬 **Demo video:** _coming soon — gif/video link will go here_
 
