@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Footer from "./components/Footer.jsx";
 import Header from "./components/Header.jsx";
 import RequireAuth from "./components/RequireAuth.jsx";
 import { AuthProvider } from "./context/AuthContext.jsx";
@@ -44,6 +45,7 @@ export default function App() {
               <Route path="/update-password" element={<UpdatePassword />} />
             </Routes>
           </main>
+          <Footer />
         </div>
       </BrowserRouter>
     </AuthProvider>

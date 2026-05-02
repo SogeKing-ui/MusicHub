@@ -499,3 +499,13 @@ button {
   border-radius: 6px;
   font-size: 13px;
 }
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--border);
+  padding: 16px 24px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 13px;
+  background: white;
+}
