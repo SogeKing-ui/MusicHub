@@ -1,5 +1,6 @@
 -- MusicHub schema. Run this once in the Supabase SQL editor.
 -- (Dashboard -> SQL Editor -> New query -> paste -> Run.)
+-- Re-running it is safe: each policy is dropped before being re-created.
 
 -- Posts ---------------------------------------------------------------
 create table if not exists public.posts (
@@ -15,20 +16,22 @@ create table if not exists public.posts (
 alter table public.posts enable row level security;
 
 -- Anyone can read posts.
-drop policy if exists "posts read"  on public.posts;
+drop policy if exists "posts read"   on public.posts;
 create policy "posts read"   on public.posts for select using (true);
 
--- Anyone (incl. anon) can create posts during the dev phase.
--- Tightened after auth ships in the next commit.
+-- Only signed-in users can post, and the row's user_id must match them.
 drop policy if exists "posts insert" on public.posts;
-create policy "posts insert" on public.posts for insert with check (true);
+create policy "posts insert" on public.posts
+  for insert with check (auth.uid() = user_id);
 
--- Anyone can update / delete during the dev phase.
+-- Only the author can update or delete their own post.
 drop policy if exists "posts update" on public.posts;
-create policy "posts update" on public.posts for update using (true);
+create policy "posts update" on public.posts
+  for update using (auth.uid() = user_id);
 
 drop policy if exists "posts delete" on public.posts;
-create policy "posts delete" on public.posts for delete using (true);
+create policy "posts delete" on public.posts
+  for delete using (auth.uid() = user_id);
 
 
 -- Comments ------------------------------------------------------------
@@ -42,17 +45,20 @@ create table if not exists public.comments (
 
 alter table public.comments enable row level security;
 
-drop policy if exists "comments read" on public.comments;
-create policy "comments read"  on public.comments for select using (true);
+drop policy if exists "comments read"   on public.comments;
+create policy "comments read"   on public.comments for select using (true);
 
 drop policy if exists "comments insert" on public.comments;
-create policy "comments insert" on public.comments for insert with check (true);
+create policy "comments insert" on public.comments
+  for insert with check (auth.uid() = user_id);
 
 drop policy if exists "comments delete" on public.comments;
-create policy "comments delete" on public.comments for delete using (true);
+create policy "comments delete" on public.comments
+  for delete using (auth.uid() = user_id);
 
 
 -- Atomic upvote helper ------------------------------------------------
+-- Anyone (incl. anon) can upvote any post any number of times.
 create or replace function public.upvote_post(post_id uuid)
 returns int
 language sql
