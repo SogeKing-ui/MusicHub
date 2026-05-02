@@ -30,6 +30,22 @@ npm run dev
 
 The app starts on http://localhost:5173.
 
+> The app runs without a Supabase project too — until env vars are set,
+> posts/comments are stored in your browser's localStorage.
+
+## Supabase setup
+
+1. Create a new project at [supabase.com](https://supabase.com).
+2. In the dashboard go to **SQL Editor → New query**, paste the contents of
+   [`supabase/schema.sql`](supabase/schema.sql), and run it.
+3. In **Settings → API**, copy your **Project URL** and **anon public key**
+   into `.env`:
+   ```
+   VITE_SUPABASE_URL=...
+   VITE_SUPABASE_ANON_KEY=...
+   ```
+4. Restart the dev server. The app now reads/writes from Supabase.
+
 ## Tech stack
 
 - **Frontend:** React 18, Vite, React Router
