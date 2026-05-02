@@ -8,6 +8,7 @@ import {
   upvotePost,
 } from "../lib/postsStore.js";
 import { timeAgo } from "../lib/timeAgo.js";
+import PostSummary from "../components/PostSummary.jsx";
 
 export default function PostDetail() {
   const { id } = useParams();
@@ -101,6 +102,8 @@ export default function PostDetail() {
             </button>
           </div>
         </div>
+
+        <PostSummary post={post} comments={comments} />
 
         <section className="comments">
           {comments.length === 0 ? (

@@ -46,9 +46,23 @@ The app starts on http://localhost:5173.
    ```
 4. Restart the dev server. The app now reads/writes from Supabase.
 
+## AI summary feature
+
+Each post page has a "Generate summary" button that calls Google's Gemini
+(via the `netlify/functions/summarize-post.js` serverless function) and
+displays a 2-3 sentence summary of the post + comments + upvotes.
+
+The Gemini API key never leaves the server. Set it in:
+
+- **Netlify dashboard:** Site settings → Environment variables → add
+  `GEMINI_API_KEY`.
+- **Locally** (only if you run `netlify dev`): in your `.env` file.
+
+Get a free Gemini API key at <https://aistudio.google.com/app/apikey>.
+
 ## Tech stack
 
 - **Frontend:** React 18, Vite, React Router
 - **Backend:** Supabase (Postgres + Auth)
-- **AI:** Anthropic Claude (via a Netlify serverless function)
+- **AI:** Google Gemini (via a Netlify serverless function)
 - **Hosting:** Netlify
