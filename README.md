@@ -84,6 +84,7 @@ Here's a walkthrough of implemented user stories: https://www.loom.com/share/238
 
 ## Gif
 
+<img width="554" height="306" alt="Kapture 2026-05-03 at 20 27 38" src="https://github.com/user-attachments/assets/b408e16c-e0d7-4876-a429-120b96ec84e2" />
 
 
 
