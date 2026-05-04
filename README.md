@@ -78,11 +78,12 @@ The following **additional** features are implemented:
 
 ## Video Walkthrough
 
-Here's a walkthrough of implemented user stories:
+Here's a walkthrough of implemented user stories: https://www.loom.com/share/238115d10edc498ba40133a38b3983ba
 
 
 
 ## Gif
+
 
 
 
